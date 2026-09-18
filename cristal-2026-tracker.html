@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dossier African Cristal 2026</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style id="app-style"></style>
+
+</head>
+<body>
+<div id="app"></div>
+
+<script id="app-script">
+/* ---------- static content ---------- */
+const TITLE = "Dossier African Cristal 2026 — Voice Africa";
+
+const ENTRIES = [
+  { id:"A1", project:"Rapport annuel Sonatel", group:"9 · Design", sub:"Annual Report / Brochure / Publication", type:"Single", fee:250, tag:"fort",
+    note:"Candidat naturel : le rapport annuel correspond exactement à cette sous-catégorie." },
+  { id:"A2", project:"Rapport annuel Sonatel", group:"12 · Long Term Creativity", sub:"Campagne long-terme (4 éditions ou plus)", type:"Campagne", fee:420, tag:"à vérifier",
+    note:"Possible si Voice Africa a produit ce rapport sur 4 éditions ou plus, avec preuve d'évolution d'une édition à l'autre." },
+
+  { id:"B1", project:"Film BCEAO PI SPI", group:"1 · Film", sub:"TV/Cinéma — durée à préciser (≤30s / 31–60s / 60s+)", type:"Single", fee:250, tag:"fort",
+    note:"Confirmer la durée exacte du film pour choisir la bonne sous-catégorie." },
+  { id:"B2", project:"Film BCEAO PI SPI", group:"11 · Social Impact", sub:"Single entry", type:"Single", fee:250, tag:"fort",
+    note:"Pertinent si le film porte un message d'inclusion financière ou d'impact sociétal." },
+  { id:"B3", project:"Film BCEAO PI SPI", group:"8 · Creative Technology", sub:"Creative use of Data / Use of AI", type:"Single", fee:250, tag:"optionnel",
+    note:"À envisager seulement si le film met en avant la donnée ou l'IA du système de paiement instantané." },
+  { id:"B4", project:"Film BCEAO PI SPI", group:"10 · Film Craft", sub:"Outstanding Direction / Use of Music", type:"Single", fee:250, tag:"optionnel",
+    note:"Si la réalisation ou la bande son sont un vrai point fort créatif." },
+  { id:"B5", project:"Film BCEAO PI SPI", group:"Media Cristal", sub:"Media Insights & Strategy", type:"Single", fee:250, tag:"optionnel",
+    note:"Si le film s'appuie sur un insight audience particulièrement fort." },
+
+  { id:"C1", project:"Documentaire BCEAO PI SPI", group:"11 · Social Impact", sub:"Single entry", type:"Single", fee:250, tag:"fort",
+    note:"Le format documentaire est un candidat naturel pour Social Impact." },
+  { id:"C2", project:"Documentaire BCEAO PI SPI", group:"10 · Film Craft", sub:"Outstanding Direction / Emerging Director", type:"Single", fee:250, tag:"optionnel",
+    note:"À envisager si la réalisation se distingue particulièrement." },
+  { id:"C3", project:"Documentaire BCEAO PI SPI", group:"1 · Film", sub:"TV/Cinéma over 60 seconds", type:"Single", fee:250, tag:"optionnel",
+    note:"Seulement si le documentaire a été diffusé tel quel en TV/cinéma." },
+
+  { id:"D1", project:"Campagne BCEAO", group:"11 · Social Impact", sub:"Campaign entry", type:"Campagne", fee:420, tag:"fort",
+    note:"Regroupe film + documentaire + autres exécutions si le dispositif forme une campagne cohérente." },
+  { id:"D2", project:"Campagne BCEAO", group:"1 · Film", sub:"Campaign entry", type:"Campagne", fee:420, tag:"optionnel",
+    note:"Si plusieurs films/spots composent la campagne." },
+  { id:"D3", project:"Campagne BCEAO", group:"3 · Print & OOH", sub:"Campaign entry", type:"Campagne", fee:420, tag:"optionnel",
+    note:"Si affichage ou presse fait partie du dispositif." },
+  { id:"D4", project:"Campagne BCEAO", group:"2 · Digital", sub:"Campaign entry", type:"Campagne", fee:420, tag:"optionnel",
+    note:"Si sites, bannières ou publicités vidéo en ligne font partie du dispositif." },
+  { id:"D5", project:"Campagne BCEAO", group:"4 · Social & Influencer", sub:"Campaign entry", type:"Campagne", fee:420, tag:"optionnel",
+    note:"Si un volet réseaux sociaux distinct mérite sa propre entrée." },
+  { id:"D6", project:"Campagne BCEAO", group:"5 · Audio", sub:"Radio advertising", type:"Single", fee:250, tag:"optionnel",
+    note:"Si un volet radio existe dans le dispositif." },
+  { id:"D7", project:"Campagne BCEAO", group:"Media Cristal", sub:"Media Planning", type:"Single", fee:250, tag:"optionnel",
+    note:"Si la stratégie média de la campagne est un point fort en soi." },
+  { id:"D8", project:"Campagne BCEAO", group:"Media Cristal", sub:"The Innovative Media Award", type:"Single", fee:250, tag:"optionnel",
+    note:"Si le dispositif média sort du cadre habituel." },
+  { id:"D9", project:"Campagne BCEAO", group:"12 · Long Term Creativity", sub:"Campagne long-terme (4 ans ou plus)", type:"Campagne", fee:420, tag:"à vérifier",
+    note:"Si la relation BCEAO dépasse 4 ans avec des exécutions archivées." },
+
+  { id:"E1", project:"Social Media — Soda Use Case", group:"4 · Social & Influencer", sub:"Best use of Facebook / Instagram / TikTok", type:"Single", fee:250, tag:"fort",
+    note:"À préciser avec Sidy : quelle marque et quelle plateforme pour «Soda Use Case» ?" },
+  { id:"E2", project:"Social Media — Soda Use Case", group:"4 · Social & Influencer", sub:"Influencer Campaigns", type:"Single", fee:250, tag:"optionnel",
+    note:"Si un·e influenceur·euse est au cœur du dispositif." },
+  { id:"E3", project:"Social Media — Soda Use Case", group:"Media Cristal", sub:"Strategy on Social Media", type:"Single", fee:250, tag:"optionnel",
+    note:"Si la stratégie sociale elle-même est le point fort." },
+  { id:"E4", project:"Social Media — Soda Use Case", group:"8 · Creative Technology", sub:"Use of AI", type:"Single", fee:250, tag:"optionnel",
+    note:"Si des outils IA ont été utilisés dans la production ou la diffusion." },
+
+  { id:"F1", project:"El Mejor (activation Coupe du Monde)", group:"4 · Social & Influencer", sub:"Best use of Facebook / Instagram / TikTok", type:"Single", fee:250, tag:"fort",
+    note:"Ajouté par Sidy — activation digitale menée pendant la Coupe du Monde." },
+  { id:"F2", project:"El Mejor (activation Coupe du Monde)", group:"Media Cristal", sub:"Strategy on Social Media", type:"Single", fee:250, tag:"fort",
+    note:"Ajouté par Sidy — pertinent si la stratégie sociale de l'activation est un point fort en soi." }
+];
+
+const RULES = [
+  "L'œuvre est déposée telle que publiée/diffusée, sans modification pour l'entrée.",
+  "L'œuvre a été réalisée dans le cadre d'un brief et d'un contrat rémunéré réels — ou, en promotion/ONG, la marque a validé toute la production.",
+  "L'autorisation de la marque commanditaire est obtenue ; le festival peut la demander directement.",
+  "Les coordonnées complètes d'un contact chez l'annonceur (nom, poste, contact) sont incluses dans chaque entrée.",
+  "L'entrée n'est ni spéculative ni conceptuelle, et n'a pas été retirée ou interdite du marché.",
+  "Un responsable habilité (DC, CEO ou Président) de Voice Africa a validé l'entrée.",
+  "L'œuvre n'a pas déjà été déposée dans la même catégorie African Cristal l'an dernier.",
+  "Aucune mention de Voice Africa ou des sociétés créatives contributrices dans les visuels, sauf auto-promotion ou mention déjà présente à l'origine.",
+  "L'entrée est compréhensible en anglais.",
+  "Après le 15 août 2026, un retrait n'est plus remboursé — implicite : les frais sont désormais engagés dès le dépôt.",
+  "Les médias fournis doivent être la version finale au moment du paiement ; aucun remplacement accepté ensuite."
+];
+
+const FESTIVAL_DATE = "2026-10-15T00:00:00";
+const FESTIVAL_LOCATION = "Casablanca";
+const DEADLINE_DATE = "2026-09-25T23:59:59";
+
+/*S*/const STATE = {"A1":true,"A2":false,"B1":true,"B2":true,"B3":false,"B4":false,"B5":false,"C1":true,"C2":false,"C3":false,"D1":true,"D2":false,"D3":false,"D4":false,"D5":false,"D6":false,"D7":false,"D8":false,"D9":false,"E1":true,"E2":false,"E3":false,"E4":false,"F1":true,"F2":true};/*E*/
+
+/* ---------- styles ---------- */
+const CSS = `
+:root{
+  --bg:#F4F5F9; --surface:#FFFFFF; --surface-2:#EAEBF2; --border:#DCDEE8;
+  --text:#15141F; --text-muted:#5B5A70; --accent:#5B3DF5; --accent-contrast:#FFFFFF;
+  --gold:#9C6A16; --good-bg:#E3F3EA; --good-text:#1D7A4C; --warn-bg:#FBEEDD; --warn-text:#8A4B12;
+  --check-bg:#EEEBFF;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131220; --surface:#1B1A2B; --surface-2:#242336; --border:#34334A;
+    --text:#F1F0F7; --text-muted:#A6A3BD; --accent:#9C86FF; --accent-contrast:#131220;
+    --gold:#E3B15C; --good-bg:#143327; --good-text:#6FD9A6; --warn-bg:#3A2B14; --warn-text:#F0B15C;
+    --check-bg:#241F3D;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131220; --surface:#1B1A2B; --surface-2:#242336; --border:#34334A;
+  --text:#F1F0F7; --text-muted:#A6A3BD; --accent:#9C86FF; --accent-contrast:#131220;
+  --gold:#E3B15C; --good-bg:#143327; --good-text:#6FD9A6; --warn-bg:#3A2B14; --warn-text:#F0B15C;
+  --check-bg:#241F3D;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--text);font-family:"IBM Plex Sans",system-ui,sans-serif;}
+.wrap{max-width:1040px;margin:0 auto;padding:32px 20px 64px;}
+h1,h2,h3{font-family:"Sora",system-ui,sans-serif;font-weight:700;text-wrap:balance;margin:0;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600;}
+.muted{color:var(--text-muted);}
+.mono{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+a{color:var(--accent);}
+header.top{display:flex;flex-direction:column;gap:8px;margin-bottom:28px;}
+header.top h1{font-size:clamp(24px,4vw,32px);}
+.sub{color:var(--text-muted);font-size:15px;max-width:60ch;}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:24px 0;}
+.tile{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px;}
+.tile .num{font-family:"IBM Plex Mono",monospace;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;}
+.tile .label{font-size:12.5px;color:var(--text-muted);}
+
+.callout{background:var(--warn-bg);color:var(--warn-text);border-radius:10px;padding:16px 18px;margin:24px 0;}
+.callout h3{font-size:15px;color:var(--warn-text);margin-bottom:8px;}
+.callout ol{margin:0;padding-left:20px;}
+.callout li{margin:4px 0;line-height:1.5;}
+.callout p{margin:8px 0 0;font-size:13.5px;opacity:.9;}
+.tile.urgent{background:var(--warn-bg);border-color:var(--warn-text);}
+.tile.urgent .num,.tile.urgent .label{color:var(--warn-text);}
+.deadline-banner{display:flex;align-items:center;gap:10px;background:var(--accent);color:var(--accent-contrast);border-radius:10px;padding:12px 18px;margin:20px 0 0;font-size:14px;font-weight:600;}
+.deadline-banner .mono{font-size:15px;}
+
+section.projects{display:flex;flex-direction:column;gap:16px;margin:28px 0;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+.card > header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:4px;}
+.card h2{font-size:18px;}
+.card .count{font-size:13px;color:var(--text-muted);font-family:"IBM Plex Mono",monospace;}
+.rows{display:flex;flex-direction:column;margin-top:10px;}
+.row{display:grid;grid-template-columns:22px 1fr auto auto;gap:12px;align-items:start;padding:10px 0;border-top:1px solid var(--border);}
+.row:first-child{border-top:none;}
+.row input[type=checkbox]{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);}
+.row .cat{font-size:14px;font-weight:600;}
+.row .sub{font-size:13.5px;color:var(--text-muted);margin-top:1px;}
+.row .note{font-size:12.5px;color:var(--text-muted);margin-top:4px;line-height:1.45;}
+.chip{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap;height:fit-content;}
+.chip.type{background:var(--surface-2);color:var(--text);}
+.chip.tag-fort{background:var(--good-bg);color:var(--good-text);}
+.chip.tag-optionnel{background:var(--surface-2);color:var(--text-muted);}
+.chip.tag-a-verifier{background:var(--warn-bg);color:var(--warn-text);}
+.fee{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px;text-align:right;white-space:nowrap;}
+
+.rules{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:28px 0;}
+.rules h2{font-size:17px;margin-bottom:10px;}
+.rules ul{margin:0;padding-left:20px;}
+.rules li{margin:6px 0;font-size:13.5px;line-height:1.55;color:var(--text-muted);}
+
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between;}
+.save-status{position:sticky;top:12px;float:right;font-size:12px;font-family:"IBM Plex Mono",monospace;background:var(--surface);border:1px solid var(--border);padding:5px 10px;border-radius:99px;color:var(--text-muted);}
+
+@media (max-width:640px){
+  .row{grid-template-columns:20px 1fr;grid-template-areas:"cb cat" ". chips" ". fee";row-gap:4px;}
+  .row input[type=checkbox]{grid-area:cb;}
+  .row .cat-block{grid-area:cat;}
+  .row .chips{grid-area:chips;display:flex;gap:8px;margin-top:2px;align-items:center;}
+  .fee{grid-area:fee;text-align:left;}
+}
+`;
+
+/* ---------- render ---------- */
+function fmtEuro(n){ return n.toLocaleString("fr-FR") + " €"; }
+
+function daysUntil(dateStr){
+  const target = new Date(dateStr);
+  const now = new Date();
+  return Math.max(0, Math.ceil((target - now) / 86400000));
+}
+
+function tagClass(tag){
+  if(tag === "fort") return "tag-fort";
+  if(tag === "à vérifier") return "tag-a-verifier";
+  return "tag-optionnel";
+}
+
+function renderRow(e, state){
+  const checked = !!state[e.id];
+  return `<div class="row" data-id="${e.id}">
+    <input type="checkbox" id="cb-${e.id}" ${checked ? "checked" : ""} aria-label="Sélectionner ${e.group} — ${e.sub}">
+    <div class="cat-block">
+      <div class="cat">${e.group} <span class="muted">›</span> ${e.sub}</div>
+      <div class="note">${e.note}</div>
+    </div>
+    <div class="chips">
+      <span class="chip type">${e.type}</span>
+      <span class="chip ${tagClass(e.tag)}">${e.tag}</span>
+    </div>
+    <div class="fee">${fmtEuro(e.fee)}</div>
+  </div>`;
+}
+
+function renderProjects(state){
+  const byProject = [];
+  const seen = {};
+  ENTRIES.forEach(e => {
+    if(!seen[e.project]){ seen[e.project] = { name: e.project, items: [] }; byProject.push(seen[e.project]); }
+    seen[e.project].items.push(e);
+  });
+  return byProject.map(p => {
+    const selectedCount = p.items.filter(e => state[e.id]).length;
+    return `<div class="card">
+      <header>
+        <h2>${p.name}</h2>
+        <span class="count">${selectedCount}/${p.items.length} catégorie(s) retenue(s)</span>
+      </header>
+      <div class="rows">${p.items.map(e => renderRow(e, state)).join("")}</div>
+    </div>`;
+  }).join("");
+}
+
+function renderShell(state){
+  const selectedEntries = ENTRIES.filter(e => state[e.id]);
+  const totalFee = selectedEntries.reduce((s,e) => s + e.fee, 0);
+  const days = daysUntil(FESTIVAL_DATE);
+  const daysLeft = daysUntil(DEADLINE_DATE);
+  const urgent = daysLeft <= 10;
+  return `
+  <div class="wrap">
+    <span class="save-status" id="save-status">—</span>
+    <header class="top">
+      <span class="eyebrow">African Cristal Festival 2026 · ${FESTIVAL_LOCATION}</span>
+      <h1>Dossier de candidature — Voice Africa</h1>
+      <p class="sub">Suivi des 5 projets à soumettre, des catégories envisagées et du budget d'entrée. Coche/décoche les catégories retenues — les choix sont sauvegardés automatiquement.</p>
+    </header>
+
+    <div class="deadline-banner">🗓️ Clôture des dépôts : <span class="mono">25 septembre 2026</span> — soit <span class="mono">J-${daysLeft}</span></div>
+
+    <div class="stats">
+      <div class="tile"><span class="num mono">${selectedEntries.length}<span class="muted" style="font-size:15px"> / ${ENTRIES.length}</span></span><span class="label">Entrées retenues</span></div>
+      <div class="tile"><span class="num mono">${fmtEuro(totalFee)}</span><span class="label">Budget estimé (tarif standard)</span></div>
+      <div class="tile${urgent ? " urgent" : ""}"><span class="num mono">${daysLeft}</span><span class="label">Jours avant la clôture (25 sept.)</span></div>
+      <div class="tile"><span class="num mono">${days}</span><span class="label">Jours avant le festival (15 oct. 2026)</span></div>
+    </div>
+
+    <div class="callout">
+      <h3>À trancher avec Sidy cette semaine</h3>
+      <ol>
+        <li>Dates de diffusion/lancement des projets (doivent tomber entre le 1ᵉʳ octobre 2025 et le 25 septembre 2026 pour être éligibles).</li>
+        <li>Valider ou écarter les catégories proposées ci-dessous, projet par projet.</li>
+        <li>Préciser ce qu'est « Soda Use Case » — marque, plateforme, contexte — pour affiner le choix de catégorie.</li>
+        <li>Réunir pour chaque entrée : accord écrit de la marque + coordonnées d'un contact chez l'annonceur (règle obligatoire du festival).</li>
+        <li>Obtenir la validation budgétaire de la direction avant la clôture du 25 septembre.</li>
+      </ol>
+      <p>Tarif appliqué : la fenêtre early bird (jusqu'au 7 août 2026) est passée — tarif standard retenu partout : 250 € / entrée simple, 420 € / campagne.</p>
+    </div>
+
+    <section class="projects">${renderProjects(state)}</section>
+
+    <div class="rules">
+      <h2>Rappel des règles clés d'entrée</h2>
+      <ul>${RULES.map(r => `<li>${r}</li>`).join("")}</ul>
+    </div>
+
+    <footer>
+      <span>Dernière mise à jour du contenu : 18 septembre 2026 · Sources : africancristalfestival.com, africancristalfestival.awardsengine.com/rules</span>
+      <span>Doute sur une éligibilité : contact@africancristalfestival.com</span>
+    </footer>
+  </div>`;
+}
+
+/* ---------- boot & interaction ---------- */
+function buildDocument(state){
+  const scriptSrc = document.getElementById("app-script").textContent
+    .replace(/\/\*S\*\/[\s\S]*?\/\*E\*\//, "/*S*/" + JSON.stringify(state) + "/*E*/");
+  return "<!doctype html>\n<html lang=\"fr\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>" + TITLE + "</title>\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap\">\n<style>" + CSS + "</style>\n</head>\n<body>\n<div id=\"app\">" + renderShell(state) + "</div>\n<script id=\"app-script\">" + scriptSrc + "</" + "script>\n</body>\n</html>";
+}
+
+let artifactApi = null;
+let saving = false;
+
+function setSaveStatus(text){
+  const el = document.getElementById("save-status");
+  if(el) el.textContent = text;
+}
+
+async function persist(){
+  if(!artifactApi){ setSaveStatus("Non sauvegardé (session en lecture seule)"); return; }
+  if(saving) return;
+  saving = true;
+  setSaveStatus("Enregistrement…");
+  try{
+    await artifactApi.publish(buildDocument(STATE));
+    setSaveStatus("Enregistré ✓");
+  }catch(err){
+    setSaveStatus("Non enregistré — réessaie");
+  }finally{
+    saving = false;
+  }
+}
+
+function attachHandlers(){
+  document.querySelectorAll("#app input[type=checkbox]").forEach(cb => {
+    cb.addEventListener("change", () => {
+      const id = cb.closest(".row").dataset.id;
+      STATE[id] = cb.checked;
+      document.getElementById("app").innerHTML = renderShell(STATE);
+      attachHandlers();
+      persist();
+    });
+  });
+}
+
+function init(){
+  document.getElementById("app-style").textContent = CSS;
+  document.getElementById("app").innerHTML = renderShell(STATE);
+  attachHandlers();
+  if(window.claude && window.claude.use){
+    window.claude.use("artifact").then(api => {
+      artifactApi = api;
+      setSaveStatus(api ? "Prêt à sauvegarder" : "Non sauvegardé (capacité indisponible)");
+    }).catch(() => setSaveStatus("Non sauvegardé (capacité indisponible)"));
+  } else {
+    setSaveStatus("Non sauvegardé (aperçu local)");
+  }
+}
+
+if(window.claude && window.claude.hot){
+  window.claude.hot.snapshot && window.claude.hot.snapshot(() => STATE);
+  window.claude.hot.ready ? window.claude.hot.ready(init) : init();
+}else{
+  init();
+}
+</script>
+
+</body>
+</html>
